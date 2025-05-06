@@ -5,44 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Spotify OAuth Redirect</title>
     <script>
-        // This function extracts the 'code' query parameter from the URL
         function getCodeFromUrl() {
             const urlParams = new URLSearchParams(window.location.search);
             return urlParams.get('code');
         }
 
-        // Once the code is retrieved, send it to your server (e.g., through an API call)
-        function sendCodeToServer(code) {
-            fetch('https://your-server-url/callback', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ code: code }),
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Successfully sent code:', data);
-                alert('Successfully authenticated!');
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Authentication failed');
-            });
-        }
-
-        // Main function to execute after the page loads
         window.onload = function () {
             const code = getCodeFromUrl();
             if (code) {
-                sendCodeToServer(code);  // Send code to your server
+                document.getElementById('code-display').textContent = code;
             } else {
-                alert('No code found in the URL');
+                document.getElementById('code-display').textContent = 'No code found in the URL';
             }
         };
     </script>
 </head>
 <body>
-    <h1>Redirecting...</h1>
+    <h1>Spotify OAuth Code</h1>
+    <p id="code-display">Loading...</p>
 </body>
 </html>
