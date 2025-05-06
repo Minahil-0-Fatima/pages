@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify OAuth Redirect</title>
+    <script>
+        function getCodeFromUrl() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('code');
+        }
+
+        window.onload = function () {
+            const code = getCodeFromUrl();
+            if (code) {
+                document.getElementById('code-display').textContent = code;
+            } else {
+                document.getElementById('code-display').textContent = 'No code found in the URL';
+            }
+        };
+    </script>
+</head>
+<body>
+    <h1>Spotify OAuth Code</h1>
+    <p id="code-display">Loading...</p>
+</body>
+</html>
